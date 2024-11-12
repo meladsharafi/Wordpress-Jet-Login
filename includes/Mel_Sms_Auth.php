@@ -203,7 +203,7 @@ class Mel_Sms_Auth
     $js_auth_step = $_POST['formData']['jsAuthStep'];
     $redirect_link = get_url_query_value($_SERVER['HTTP_REFERER'], 'redirect_to');
     $otp_code = rand(1000, 9999);
-    $otp_auth_sms = $otp_code."\n". '@' . preg_replace('#^https?://#i', 'www.', get_site_url()) . ' #' . $otp_code;
+    $otp_auth_sms = $otp_code;// ."\n". '@' . preg_replace('#^https?://#i', 'www.', get_site_url()) . ' #' . $otp_code;
 
     $query = new \WP_Query([
       'post_type' => $this->msa_post_type_name,

@@ -16,12 +16,12 @@ if (is_user_logged_in()) {
 
     <p class="text-gray-700">عضویت | ورود</p>
 
-    <div class="mx-auto text-center">
+    <div class="mx-auto text-center max-h-28">
       <?php if (get_custom_logo()): ?>
         <?php the_custom_logo() ?>
       <?php elseif (!empty(get_option('msa_auth_form_logo'))): ?>
         <a href="<?php echo get_site_url() ?>">
-          <img src="<?php echo get_option('msa_auth_form_logo') ?>" alt="">
+          <img class="max-h-28" src="<?php echo get_option('msa_auth_form_logo') ?>" alt="">
         </a>
       <?php else: ?>
         <a class="font-semibold" href="<?php echo get_home_url() ?>"><?php echo get_bloginfo() ?></a>
@@ -67,14 +67,6 @@ if (is_user_logged_in()) {
   <div class="backdrop__auth-form  hidden !m-0  fixed inset-0 bg-black opacity-50 z-40"></div>
 <?php endif ?>
 
-<?php
-  // echo $_SERVER['HTTP_REFERER'] ;
-
-
-  // echo esc_url( add_query_arg( 'foo', 'bar' ) );
-; ?>
-<!-- <div class="fixed inset-0 bg-red-500 opacity-20 z-40"></div> -->
-
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   document.body.className += ' overflow-hidden';
-</script>
+</script> -->
