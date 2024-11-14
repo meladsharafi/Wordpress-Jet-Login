@@ -6,13 +6,13 @@
 if (is_user_logged_in()) {
   wp_redirect(get_edit_profile_url());
 }
-add_action('wp_head', 'view_templates');
+// add_action('wp_head', 'view_templates');
 
-function view_templates(){
+// function view_templates(){
 
   ?>
 
-<div class="container__auth-form m-0 <?php echo  $args['view-modal-form'] ?  'hidden' : '' ?> w-72 md:w-80 flex-col mx-auto fixed top-5 md:top-[20%] right-1/2 translate-x-1/2 z-[9999]">
+<div class="container__auth-form space-y-0 m-0 <?php echo  $args['view-modal-form'] ?  'hidden' : '' ?> w-72 md:w-80 flex-col mx-auto fixed top-5 md:top-[20%] right-1/2 translate-x-1/2 z-[9999]">
   <form id="auth-form" class="relative p-5 md:p-7 flex flex-col gap-3 bg-white shadow-lg rounded-xl overflow-hidden duration-1000" action="" method="post" data-url="<?php echo admin_url('admin-ajax.php') ?>">
 
     <?php if ($args['view-modal-form']): ?>
@@ -75,8 +75,12 @@ function view_templates(){
   <?php endif ?>
   
   <script type="text/javascript">
-    document.body.className += ' overflow-hidden';
+
+var root = document.documentElement;
+root.className += ' overflow-hidden';
+
+   
   </script>
 
   <?php
-  }
+  // }

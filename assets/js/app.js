@@ -1,5 +1,5 @@
 // ==========================================================Burger Menu
-import AuthForm from "./modules/AuthForm.js?ver=1.0.0";
+import AuthForm from "./modules/AuthForm.js?ver=1.0.1";
  
 jQuery(document).ready(function ($) {
   // Instantiate a new object using our modules/classe

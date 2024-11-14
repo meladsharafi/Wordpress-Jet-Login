@@ -41,6 +41,9 @@ include_once('includes/helpers/general.php');
 // include_once('templates/custom-tpl.php');
 MSA\Mel_Sms_Auth::get_instance();
 
+// global $pagenow;
+// var_dump($pagenow);
+
 
 // function my_custom_login_logo() {
 //   echo '<style type="text/css">
