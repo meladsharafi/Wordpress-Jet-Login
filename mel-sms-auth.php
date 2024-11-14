@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: جت لاگین
  * Plugin URI: https://melad.ir
@@ -37,18 +38,41 @@ if (! defined('MSA_PLUGIN_FILE')) {
 }
 
 include_once('includes/helpers/general.php');
+// include_once('templates/custom-tpl.php');
 MSA\Mel_Sms_Auth::get_instance();
 
-function my_login_logo_url_title() {
-  return 'Your Site Name and Info';
-}
 
-add_filter( 'login_headertext', 'my_login_logo_url_title' );
+// function my_custom_login_logo() {
+//   echo '<style type="text/css">
+//       h1 a { background-image:url('.get_option('msa_auth_form_logo').') !important; }
+//   </style>';
+// }
 
-function my_login_logo_url() {
-  return home_url();
-}
-add_filter( 'login_headerurl', 'my_login_logo_url' );
+// add_action('login_head', 'my_custom_login_logo');
+
+
+// function my_login_logo_url_title()
+// {
+//   return get_bloginfo();
+// }
+// add_filter('login_headertext', 'my_login_logo_url_title');
+
+
+// function my_login_logo_url()
+// {
+//   return home_url();
+// }
+// add_filter('login_headerurl', 'my_login_logo_url');
+
+
+// function magicalendar_get_event_page( $content ) {
+//   global $post;
+//    if ($post->post_title == ' dc') {
+//         $single_template = MSA_DIR . '/dc.php';
+//    }
+//    return $single_template;
+// }
+// add_filter( 'the_content', 'magicalendar_get_event_page' );
 
 
 // echo wp_login_url();

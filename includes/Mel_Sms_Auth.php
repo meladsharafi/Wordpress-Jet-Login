@@ -59,12 +59,14 @@ class Mel_Sms_Auth
     // add_filter('theme_page_templates', [$this, 'wp_template_register'], 10, 4);
     add_filter('login_url', [$this, 'custom_login_url'], 10, 3);
     add_filter('plugin_action_links_' . plugin_basename(MSA_PLUGIN_FILE), [$this, 'add_setting_link_to_plugin_action']);
+    
     add_shortcode('mel-sms-auth', [$this, 'view_template_by_shortcode']);
   }
 
   public function is_user_logged_in_hooks()
   {
     if (is_user_logged_in()) return;
+    // add_action('wp_footer', [$this, 'disable_browser_devtools']);
     add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
     // add_action('wp_head', [$this, 'view_template']);
     add_filter('script_loader_tag', [$this, 'add_module_to_script_tag'], 10, 3);
@@ -93,8 +95,6 @@ class Mel_Sms_Auth
     return $tag;
   }
 
-  public function setup_theme() {}
-
   function admin_menu()
   {
     add_options_page('احراز هویت پیامکی', 'احراز هویت پیامکی', 'manage_options', 'mel_sms_auth', [$this, 'view_auth_admin_setting'], 9);
@@ -103,7 +103,6 @@ class Mel_Sms_Auth
   public function view_template_by_shortcode($atts = [], $content = null, $tag = '')
   {
     ob_start();
-
     $this->view_template($atts['view']);
     return ob_get_clean();
   }
@@ -128,6 +127,7 @@ class Mel_Sms_Auth
     }
 
     if ($shortcut_parameter == 'form-in-single-page') {
+      
       $template_file = MSA_DIR . '/templates/' . $template_name . '.php';
       if (file_exists($template_file)) {
         load_template($template_file, true, $args);
@@ -184,7 +184,7 @@ class Mel_Sms_Auth
   public function custom_login_url($login_url, $redirect, $force_reauth = false)
   {
 
-    $login_url = site_url('mel-auth/', 'login');
+    $login_url = site_url($this->auth_page_slug, 'login');
     if (! empty($redirect)) {
       $login_url = add_query_arg('redirect_to', urlencode($redirect), $login_url);
     }
@@ -203,7 +203,7 @@ class Mel_Sms_Auth
     $js_auth_step = $_POST['formData']['jsAuthStep'];
     $redirect_link = get_url_query_value($_SERVER['HTTP_REFERER'], 'redirect_to');
     $otp_code = rand(1000, 9999);
-    $otp_auth_sms = $otp_code;// ."\n". '@' . preg_replace('#^https?://#i', 'www.', get_site_url()) . ' #' . $otp_code;
+    $otp_auth_sms = $otp_code; // ."\n". '@' . preg_replace('#^https?://#i', 'www.', get_site_url()) . ' #' . $otp_code;
 
     $query = new \WP_Query([
       'post_type' => $this->msa_post_type_name,
@@ -236,6 +236,7 @@ class Mel_Sms_Auth
         wp_send_json($response, 200);
         return;
       }
+
       $response['authResponse'] = [
         'authStep'             => 'otpSendFail',
         'message'              => 'خطا در ارسال پیامک.',
@@ -243,7 +244,6 @@ class Mel_Sms_Auth
       wp_send_json($response, 401);
       return;
     }
-
     $query->the_post();
     $post_id = get_the_ID();
     $otp_create_time = get_post_meta($post_id, 'msa_otp_create_time', true);
@@ -270,7 +270,6 @@ class Mel_Sms_Auth
       ];
       wp_send_json($response, 401);
       return;
-
     }
 
     // ============================If OTP Code No Expire AND User Enter Phone Number Again
@@ -370,10 +369,10 @@ class Mel_Sms_Auth
     $args = array(
       'labels'             => $labels,
       'public'             => false,
-      'publicly_queryable' => true,
-      'show_ui'            => true,
-      'show_in_menu'       => true,
-      'query_var'          => true,
+      'publicly_queryable' => false,
+      'show_ui'            => false,
+      'show_in_menu'       => false,
+      'query_var'          => false,
       // 'capabilities' => ['create_posts' => false],
       // 'rewrite'            => array('slug' => 'book'),
       'capability_type'    => 'post',
@@ -407,4 +406,32 @@ class Mel_Sms_Auth
    * Function used to Init WooCommerce Template Functions - This makes them pluggable by plugins and themes.
    */
   public function include_template_functions() {}
+
+
+  function disable_browser_devtools()
+  {
+    if (is_super_admin()) {
+      return;
+    } ?>
+    <script type="text/javascript">
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.body.classList.add('select-none ');
+
+      function ctrlShiftKey(e, keyCode) {
+        return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+      }
+      document.onkeydown = (e) => {
+        // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+        if (
+          event.keyCode === 123 ||
+          ctrlShiftKey(e, 'I') ||
+          ctrlShiftKey(e, 'J') ||
+          ctrlShiftKey(e, 'C') ||
+          (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+        )
+          return false;
+      };
+    </script>
+<?php }
+
 }

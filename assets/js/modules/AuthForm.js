@@ -144,7 +144,6 @@ class AuthForm {
       return;
     }
    
-
     // ====================================collect all data
     let data = {
       phoneNumber: this.phoneNumber,
