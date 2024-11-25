@@ -60,7 +60,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('Wordpress-Jet-Login');
 
 //Optional: If you're using a private repository, specify the access token like this:
-$myUpdateChecker->setAuthentication('');
+// $myUpdateChecker->setAuthentication('');
 
 // if (is_admin()) {
 //   define('GH_REQUEST_URI', 'https://github.com/meladsharafi/Wordpress-Jet-Login.git');
