@@ -4,7 +4,7 @@
  * Plugin Name: جت لاگین
  * Plugin URI: https://melad.ir
  * Description: احراز هویت پیامکی جهت ثبت نام و ورود به وبسایت، در ساده ترین و سریعترین حالت ممکن.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: میلاد
  * Author URI: https://melad.ir
  * WC requires at least: 6.0.0
