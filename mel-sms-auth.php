@@ -41,26 +41,24 @@ if (! defined('MSA_PLUGIN_FILE')) {
 }
 
 include_once('includes/helpers/general.php');
-// include_once('templates/custom-tpl.php');
 MSA\Mel_Sms_Auth::get_instance();
 
-// $updater = new Git_Plugin_Updater(__FILE__);
-
-// --------------------------------------------------------------------
+// ---------------------------------------- Git Updater ----------------------------------------
 require 'plugin-update-checker/plugin-update-checker.php';
+
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://github.com/meladsharafi/Wordpress-Jet-Login',
-	__FILE__,
-	'Wordpress-Jet-Login'
+  'https://github.com/meladsharafi/Wordpress-Jet-Login',
+  __FILE__,
+  'Wordpress-Jet-Login'
 );
-
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
 
 //Optional: If you're using a private repository, specify the access token like this:
-// $myUpdateChecker->setAuthentication('');
+  // $myUpdateChecker->setAuthentication('');
+  // ------------------------------------------------------------------------------------------------
 
 // if (is_admin()) {
 //   define('GH_REQUEST_URI', 'https://github.com/meladsharafi/Wordpress-Jet-Login.git');
@@ -152,4 +150,3 @@ $myUpdateChecker->setBranch('main');
   //         exit();
   //     }
   // }
-
