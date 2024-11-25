@@ -46,7 +46,6 @@ MSA\Mel_Sms_Auth::get_instance();
 
 // $updater = new Git_Plugin_Updater(__FILE__);
 
-
 // --------------------------------------------------------------------
 require 'plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
@@ -61,8 +60,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('Wordpress-Jet-Login');
 
 //Optional: If you're using a private repository, specify the access token like this:
-$myUpdateChecker->setAuthentication('your-token-here');
-
+$myUpdateChecker->setAuthentication('');
 
 // if (is_admin()) {
 //   define('GH_REQUEST_URI', 'https://github.com/meladsharafi/Wordpress-Jet-Login.git');
