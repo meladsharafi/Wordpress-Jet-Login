@@ -12,7 +12,7 @@ if (is_user_logged_in()) {
 
   ?>
 
-<div class="container__auth-form  m-0 <?php echo  $args['view-modal-form'] ?  'hidden' : '' ?> w-72 md:w-80 flex-col mx-auto fixed top-5 md:top-[20%] right-1/2 translate-x-1/2 z-[9999]">
+<div class="container__auth-form  m-0 <?php echo  $args['view-modal-form'] ?  'hidden' : '' ?> w-72 md:w-80 flex-col mx-auto fixed top-5 md:top-[20%] right-1/2 translate-x-1/2 z-[9999] select-none">
   <form id="auth-form" class="!space-y-0 relative p-5 md:p-7 flex flex-col gap-3 bg-white shadow-lg rounded-xl overflow-hidden duration-1000" action="" method="post" data-url="<?php echo admin_url('admin-ajax.php') ?>">
 
     <?php if ($args['view-modal-form']): ?>
@@ -60,7 +60,7 @@ if (is_user_logged_in()) {
     </div>
 
     <div id="footer__auth-form" class="flex flex-col gap-3">
-      <a href="<?php echo empty(get_option('msa_auth_form_terms-url')) ? '' : get_option('msa_auth_form_terms-url')  ?>" class="terms-link__auth-form text-center text-xs mb-0 underline">قوانین و مقررات</a>
+      <a href="<?php echo empty(get_option('msa_auth_form_terms-url')) ? '' : get_option('msa_auth_form_terms-url')  ?>" class="terms-link__auth-form w-fit mx-auto text-center text-xs mb-0 underline">قوانین و مقررات</a>
       <span id="countdown__auth-form" class="text-base hidden"></span>
       <p class="status__auth-form hidden mb-0 text-base" data-auth-message="status"></p>
     </div>
@@ -82,6 +82,3 @@ root.className += ' overflow-hidden';
 
    
   </script>
-
-  <?php
-  // }

@@ -19,10 +19,16 @@ if (! defined('ABSPATH')) {
   exit;
 }
 
+
+if (! defined('SITE_URL_WITHOUT_HTTP')) {
+$site_url_without_http = preg_replace("(^https?://)", "", site_url() );
+define('SITE_URL_WITHOUT_HTTP',$site_url_without_http);
+}
+
+
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
   require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
-
 
 if (! defined('MSA_VERSION')) {
   define('MSA_VERSION', '1.0.0');
@@ -42,6 +48,8 @@ if (! defined('MSA_PLUGIN_FILE')) {
 
 include_once('includes/helpers/general.php');
 MSA\Mel_Sms_Auth::get_instance();
+
+
 
 // ---------------------------------------- Git Updater ----------------------------------------
 require 'plugin-update-checker/plugin-update-checker.php';

@@ -197,7 +197,7 @@ class Mel_Sms_Auth
   public function auth_ajax_request_process()
   {
     // check_ajax_referer('msa_ajax_nonce', 'msa-nonce');
-    
+
 
     // if (!isset($_POST['formData']['msaNonce']) || wp_verify_nonce($_POST['formData']['msaNonce'], 'msa_ajax_nonce')) {
 
@@ -315,6 +315,7 @@ class Mel_Sms_Auth
         'user_login'     =>  apply_filters('pre_user_login', $phone_number),
         'user_pass'      =>  apply_filters('pre_user_pass', $pass),
         'user_nicename'  =>  apply_filters('pre_user_nicename',  $phone_number),
+        'user_email'     =>  apply_filters('pre_user_email', $phone_number . '@' . SITE_URL_WITHOUT_HTTP),
       ]);
       // ============================login new user
       if (!is_wp_error($user_id)) {

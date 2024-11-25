@@ -60,8 +60,7 @@ class AuthForm {
   showPhoneNumberView(phoneNumber) {
     $(".phone-number-view__auth-form").html(phoneNumber);
     $(".phone-number-view__auth-form").fadeIn(300);
-    $(".phone-number-view__auth-form").removeClass('hidden');
-  
+    $(".phone-number-view__auth-form").removeClass("hidden");
   }
 
   hidePhoneNumberView() {}
@@ -70,7 +69,7 @@ class AuthForm {
   showStatus(message) {
     $(".status__auth-form").html(message);
     $(".status__auth-form").slideDown(300);
-    $(".status__auth-form").removeClass('hidden');
+    $(".status__auth-form").removeClass("hidden");
     $("input[name='phone-number']").focus();
   }
 
@@ -79,16 +78,16 @@ class AuthForm {
   }
 
   showLoadingSpinner(message) {
-    $("#btn-submit__auth-form").attr('disabled','disabled');
-    $("#btn-submit__auth-form").addClass('opacity-80');
-    $(".loading-spinner__auth-form").removeClass('opacity-0');
+    $("#btn-submit__auth-form").attr("disabled", "disabled");
+    $("#btn-submit__auth-form").addClass("opacity-80");
+    $(".loading-spinner__auth-form").removeClass("opacity-0");
     $(".loading-spinner__auth-form").fadeTo(500, 1);
   }
-  
+
   hideLoadingSpinner(message) {
     // $(".loading-spinner__auth-form").addClass('opacity-0');
-    $('#btn-submit__auth-form').removeAttr('disabled');
-    $("#btn-submit__auth-form").removeClass('opacity-80');
+    $("#btn-submit__auth-form").removeAttr("disabled");
+    $("#btn-submit__auth-form").removeClass("opacity-80");
     $(".loading-spinner__auth-form").fadeTo(500, 0);
   }
 
@@ -110,11 +109,11 @@ class AuthForm {
     });
     this.hideStatus();
   }
-  
+
   // ========================================================================================CountDown
   startCountdown(secound) {
     let timeRemaining = secound - 1;
-    $("#countdown__auth-form").removeClass('hidden');
+    $("#countdown__auth-form").removeClass("hidden");
     document.getElementById("countdown__auth-form").textContent = "اعتبار کد: ";
     const intervalId = setInterval(() => {
       const minutesLeft = Math.floor(timeRemaining / 60);
@@ -138,7 +137,7 @@ class AuthForm {
     e.preventDefault();
     this.hideStatus();
     this.showLoadingSpinner();
-    
+
     // ====================================Check Phone Number
     if (
       thisClass.jsAuthStep != "enterOtpCode" &&
@@ -148,7 +147,7 @@ class AuthForm {
       this.hideLoadingSpinner();
       return;
     }
-   
+
     // ====================================collect all data
     let data = {
       msaNonce: $("input[name='msa-nonce']").val(),
@@ -168,13 +167,17 @@ class AuthForm {
 
       success: function (response) {
         console.log(thisClass.jsAuthStep);
+        console.log(response.authResponse.message);
         // thisClass.showStatus(response.authResponse.message);
-        if (response.authResponse.authStep == "otpSend" || response.authResponse.authStep == "otpTimeExpire" ) {
+        if (
+          response.authResponse.authStep == "otpSend" ||
+          response.authResponse.authStep == "otpTimeExpire"
+        ) {
           $(".phone-number__auth-form").fadeOut(0, function () {
             $(this).remove();
           });
-          $("#btn-submit__auth-form").html('بررسی');
-          $("#btn-submit__auth-form").attr('disabled');
+          $("#btn-submit__auth-form").html("بررسی");
+          $("#btn-submit__auth-form").attr("disabled");
           thisClass.startCountdown(thisClass.otpExpireSecound);
           // thisClass.showStatus(response.authResponse.message);
           thisClass.showPhoneNumberView(data.phoneNumber);
@@ -183,16 +186,25 @@ class AuthForm {
           thisClass.jsAuthStep = "enterOtpCode";
         }
 
-        if (response.authResponse.authStep == "successLoginExistUser" || response.authResponse.authStep == "successLoginNewUser" ) {          
-          $('.otp-code__auth-form').prop('disabled',true);
-          setTimeout(()=>{
-            window.location=response.authResponse.redirectLink;
-          },2000);
+        if (response.authResponse.authStep == "otpWait") {
+          thisClass.showStatus(response.authResponse.message);
         }
-
+        if (
+          response.authResponse.authStep == "successLoginExistUser" ||
+          response.authResponse.authStep == "successLoginNewUser"
+        ) {
+          $("#countdown__auth-form").fadeOut(0, function () {
+            $(this).remove();
+          });
+          thisClass.showStatus(response.authResponse.message);
+          $(".otp-code__auth-form").prop("disabled", true);
+          setTimeout(() => {
+            window.location = response.authResponse.redirectLink;
+          }, 2000);
+        }
         thisClass.hideLoadingSpinner();
       },
-      
+
       error: function (error) {
         // console.log(thisClass.jsAuthStep);
         console.log(error.responseJSON.authResponse.message);
