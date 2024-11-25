@@ -1,0 +1,11 @@
+{
+    "name": "webdev/mel-sms-auth",
+    "autoload": {
+        "psr-4": {
+            "MSA\\": "includes/"
+        }
+    },
+    "require": {
+        "melipayamak/php": "1.0.0"
+    }
+}
