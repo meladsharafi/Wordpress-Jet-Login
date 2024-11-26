@@ -4,7 +4,7 @@
  * Plugin Name: Jet Login
  * Plugin URI: https://melad.ir
  * Description: جت لاگین، احراز هویت پیامکی جهت ثبت نام و ورود به وبسایت، در ساده ترین و سریعترین حالت ممکن.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: میلاد
  * Author URI: https://melad.ir
  * WC requires at least: 6.0.0
@@ -49,8 +49,6 @@ if (! defined('MSA_PLUGIN_FILE')) {
 include_once('includes/helpers/general.php');
 MSA\Mel_Sms_Auth::get_instance();
 
-
-
 // ---------------------------------------- Git Updater ----------------------------------------
 require 'plugin-update-checker/plugin-update-checker.php';
 
@@ -65,8 +63,8 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('main');
 
 //Optional: If you're using a private repository, specify the access token like this:
-  // $myUpdateChecker->setAuthentication('');
-  // ------------------------------------------------------------------------------------------------
+// $myUpdateChecker->setAuthentication('');
+// ------------------------------------------------------------------------------------------------
 
 // if (is_admin()) {
 //   define('GH_REQUEST_URI', 'https://github.com/meladsharafi/Wordpress-Jet-Login.git');
@@ -79,10 +77,8 @@ $myUpdateChecker->setBranch('main');
 //   $updater->init();
 // }
 
-
 // global $pagenow;
 // var_dump($pagenow);
-
 
 // function my_custom_login_logo() {
 //   echo '<style type="text/css">
@@ -146,15 +142,13 @@ $myUpdateChecker->setBranch('main');
 // var_dump($_REQUEST);
 // $_SERVER['HTTP_REFERER']=null;
 
-
-
-    // Redirect to https login if forced to use SSL
-  //   if (force_ssl_admin() && !is_ssl()) {
-  //     if (0 === strpos($_SERVER['REQUEST_URI'], 'http')) {
-  //         wp_redirect(set_url_scheme($_SERVER['REQUEST_URI'], 'https'));
-  //         exit();
-  //     } else {
-  //         wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-  //         exit();
-  //     }
-  // }
+// Redirect to https login if forced to use SSL
+//   if (force_ssl_admin() && !is_ssl()) {
+//     if (0 === strpos($_SERVER['REQUEST_URI'], 'http')) {
+//         wp_redirect(set_url_scheme($_SERVER['REQUEST_URI'], 'https'));
+//         exit();
+//     } else {
+//         wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+//         exit();
+//     }
+// }
