@@ -32,13 +32,13 @@ class Mel_Sms_Auth
     $this->msa_otp_expire_secounds = null != get_option($this->msa_option_feilds['otp_expire_seconds']) ? get_option($this->msa_option_feilds['otp_expire_seconds']) : 120;
     $this->set_hooks();
 
-    $username = get_option('msa_sms_panel_username'); //09124326535
-    $password = get_option('msa_sms_panel_password'); // 'Y57BA'
+    $username = get_option('msa_sms_panel_username'); 
+    $password = get_option('msa_sms_panel_password'); 
     $api = new MelipayamakApi($username, $password);
     $smsRest = $api->sms();
     $this->smsSoap = $api->sms('soap');
     $to = '09383079900';
-    $from = get_option('msa_sms_panel_sender_number'); // '50002710032653'
+    $from = get_option('msa_sms_panel_sender_number'); 
     $text = 'تست افزونه لاگین ساده وردپرسی';
     $this->bodyId = get_option('msa_sms_panel_text_pattern');
   }
