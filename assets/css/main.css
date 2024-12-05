@@ -627,6 +627,10 @@ video {
   margin-right: auto;
 }
 
+.\!mb-0 {
+  margin-bottom: 0px !important;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -879,6 +883,10 @@ video {
   text-decoration-color: #3b82f6 !important;
   text-decoration-thickness: 2px !important;
   text-underline-offset: 4px;
+}
+
+.decoration-none{
+  text-decoration: none !important;
 }
 
 * {

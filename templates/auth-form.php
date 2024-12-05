@@ -31,7 +31,7 @@ if (is_user_logged_in()) {
           <img class="max-h-28" src="<?php echo get_option('msa_auth_form_logo') ?>" alt="">
         </a>
       <?php else: ?>
-        <a class="font-semibold decoration-md" href="<?php echo get_home_url() ?>"><?php echo get_bloginfo() ?></a>
+        <a class="font-semibold decoration-none" href="<?php echo get_home_url() ?>"><?php echo get_bloginfo() ?></a>
         <span class="block"><?php echo get_bloginfo('description') ?></span>
       <?php endif ?>
     </div>
@@ -63,7 +63,7 @@ if (is_user_logged_in()) {
       <a href="<?php echo empty(get_option('msa_auth_form_terms-url')) ? '' : get_option('msa_auth_form_terms-url')  ?>"
         class="terms-link__auth-form w-fit mx-auto text-center text-xs mb-0 underline underline-offset-4">قوانین و مقررات</a>
       <span id="countdown__auth-form" class="text-base hidden"></span>
-      <p class="status__auth-form hidden mb-0 text-base" data-auth-message="status"></p>
+      <p class="status__auth-form hidden !mb-0 text-base" data-auth-message="status"></p>
     </div>
     <?php wp_nonce_field('msa_ajax_nonce', 'msa-nonce') ?>
   </form>

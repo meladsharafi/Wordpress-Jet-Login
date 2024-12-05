@@ -10,6 +10,10 @@
   @apply !decoration-blue-500 !decoration-2 underline-offset-4;
 }
 
+.decoration-none{
+  text-decoration: none !important;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }

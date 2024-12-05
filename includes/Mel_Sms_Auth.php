@@ -23,7 +23,7 @@ class Mel_Sms_Auth
   private $msa_post_type_name = 'msa_users_otp';
   private $msa_otp_expire_secounds;
   private $smsSoap;
-  private $bodyId; // 228021
+  private $bodyId;
   private $auth_page_slug = 'mel-auth';
 
   public  function __construct()
@@ -32,13 +32,13 @@ class Mel_Sms_Auth
     $this->msa_otp_expire_secounds = null != get_option($this->msa_option_feilds['otp_expire_seconds']) ? get_option($this->msa_option_feilds['otp_expire_seconds']) : 120;
     $this->set_hooks();
 
-    $username = get_option('msa_sms_panel_username'); 
-    $password = get_option('msa_sms_panel_password'); 
+    $username = get_option('msa_sms_panel_username');
+    $password = get_option('msa_sms_panel_password');
     $api = new MelipayamakApi($username, $password);
     $smsRest = $api->sms();
     $this->smsSoap = $api->sms('soap');
     $to = '09383079900';
-    $from = get_option('msa_sms_panel_sender_number'); 
+    $from = get_option('msa_sms_panel_sender_number');
     $text = 'تست افزونه لاگین ساده وردپرسی';
     $this->bodyId = get_option('msa_sms_panel_text_pattern');
   }
@@ -73,8 +73,10 @@ class Mel_Sms_Auth
   }
 
   public function register_styles()
-  {
-    wp_enqueue_style('mel-sms-auth-style', MSA_URL . '/assets/css/main.css', [],  filemtime(MSA_DIR . '/assets/css/main.css'));
+  {   
+   if (!is_user_logged_in()) {        
+     wp_enqueue_style('mel-sms-auth-style', MSA_URL . '/assets/css/main.css', [],  filemtime(MSA_DIR . '/assets/css/main.css'));
+    }
   }
 
   public function register_scripts()
@@ -102,6 +104,10 @@ class Mel_Sms_Auth
 
   public function view_template_by_shortcode($atts = [], $content = null, $tag = '')
   {
+    if (is_user_logged_in()) {
+      return;
+    }
+
     ob_start();
     $this->view_template($atts['view']);
     return ob_get_clean();
@@ -230,7 +236,7 @@ class Mel_Sms_Auth
 
     // ============================If user UnAvailable in post type
     if (!$query->have_posts()) {
-      $sms_send_state = $this->smsSoap->sendByBaseNumber($otp_auth_sms, $phone_number, $this->bodyId);
+      $sms_send_state = $this->smsSoap->sendByBaseNumber([$otp_auth_sms], $phone_number, $this->bodyId);
       if (intval($sms_send_state) > 100) {
         $post_array = [
           'post_type' => $this->msa_post_type_name,
