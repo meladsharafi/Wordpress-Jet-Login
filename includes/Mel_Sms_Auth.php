@@ -73,9 +73,9 @@ class Mel_Sms_Auth
   }
 
   public function register_styles()
-  {   
-   if (!is_user_logged_in()) {        
-     wp_enqueue_style('mel-sms-auth-style', MSA_URL . '/assets/css/main.css', [],  filemtime(MSA_DIR . '/assets/css/main.css'));
+  {
+    if (!is_user_logged_in()) {
+      wp_enqueue_style('mel-sms-auth-style', MSA_URL . '/assets/css/main.css', [],  filemtime(MSA_DIR . '/assets/css/main.css'));
     }
   }
 
@@ -204,7 +204,6 @@ class Mel_Sms_Auth
   {
     // check_ajax_referer('msa_ajax_nonce', 'msa-nonce');
 
-
     // if (!isset($_POST['formData']['msaNonce']) || wp_verify_nonce($_POST['formData']['msaNonce'], 'msa_ajax_nonce')) {
 
     //   $response['authResponse'] = [
@@ -217,7 +216,6 @@ class Mel_Sms_Auth
 
     // check_ajax_referer('ajax-login-nonce', 'auth_ajax_request_handler');
     $user_ip = get_user_ip();
-
     $phone_number = $_POST['formData']['phoneNumber'];
     $input_otp_code = $_POST['formData']['inputOtpCode'];
     $js_auth_step = $_POST['formData']['jsAuthStep'];
@@ -247,7 +245,6 @@ class Mel_Sms_Auth
         add_post_meta($post_id, 'msa_otp_user_ip', $user_ip);
         add_post_meta($post_id, 'msa_otp_code',  $otp_code);
         add_post_meta($post_id, 'msa_otp_create_time', time());
-
 
         $response['authResponse'] = [
           'authStep'             => 'otpSend',
@@ -391,8 +388,8 @@ class Mel_Sms_Auth
       'labels'             => $labels,
       'public'             => false,
       'publicly_queryable' => false,
-      'show_ui'            => false,
-      'show_in_menu'       => false,
+      'show_ui'            => true,
+      'show_in_menu'       => true,
       'query_var'          => false,
       // 'capabilities' => ['create_posts' => false],
       // 'rewrite'            => array('slug' => 'book'),

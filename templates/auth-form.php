@@ -19,7 +19,7 @@ if (is_user_logged_in()) {
       <p class="btn-close__auth-form absolute top-0 right-0 px-2 pt-1 bg-gray- text-red-700 font-bold rounded-xl cursor-pointer">&times;</p>
     <?php endif ?>
 
-    <span class="text-gray-700 text-base">عضویت | ورود</span>
+    <span class="text-sm text-gray-500">عضویت | ورود</span>
 
     <div class="mx-auto text-center max-h-">
       <?php if (get_custom_logo()): ?>
@@ -31,17 +31,17 @@ if (is_user_logged_in()) {
           <img class="max-h-28" src="<?php echo get_option('msa_auth_form_logo') ?>" alt="">
         </a>
       <?php else: ?>
-        <a class="font-semibold decoration-none" href="<?php echo get_home_url() ?>"><?php echo get_bloginfo() ?></a>
-        <span class="block"><?php echo get_bloginfo('description') ?></span>
+        <a class="font-semibold decoration-none " href="<?php echo get_home_url() ?>"><?php echo get_bloginfo() ?></a>
+        <span class="block text-sm text-gray-500"><?php echo get_bloginfo('description') ?></span>
       <?php endif ?>
     </div>
 
-    <p class="phone-number-view__auth-form hidden py-2 bg-gray-100 rounded-md text-center text-gray-400"></p>
+    <p class="phone-number-view__auth-form hidden py-0.5 bg-gray-100 rounded-md text-center text-gray-400 border"></p>
 
     <input class="phone-number__auth-form py-2 text-base bg-gray-100 rounded-md text-center" type="tel" name="phone-number" maxlength="11" placeholder="شماره موبایل را وارد کنید" autofocus>
 
     <div class="container-otp-code__auth-form hidden items-center gap-3">
-      <p class="whitespace-nowrap text-base">کد تایید:</p>
+      <p class="whitespace-nowrap text-base !m-0">کد تایید:</p>
       <input class="otp-code__auth-form w-full py-2 text-base text-center bg-gray-100 rounded-md " type="tel" name="otp-code" maxlength="4">
     </div>
 
@@ -56,20 +56,23 @@ if (is_user_logged_in()) {
           <animate attributeName="stroke-dasharray" values="0,200;110,200;110,200" dur="1.25s" repeatCount="indefinite"></animate>
         </circle>
       </svg>
-
     </div>
 
     <div id="footer__auth-form" class="flex flex-col gap-3">
-      <a href="<?php echo empty(get_option('msa_auth_form_terms-url')) ? '' : get_option('msa_auth_form_terms-url')  ?>"
-        class="terms-link__auth-form w-fit mx-auto text-center text-xs mb-0 underline underline-offset-4">قوانین و مقررات</a>
-      <span id="countdown__auth-form" class="text-base hidden"></span>
-      <p class="status__auth-form hidden !mb-0 text-base" data-auth-message="status"></p>
+      <div class="text-center text-xs">
+        ورود و قبول
+        <a href="<?php echo empty(get_option('msa_auth_form_terms-url')) ? '' : get_option('msa_auth_form_terms-url')?>"
+        class="terms-link__auth-form w-fit mb-0 mx-auto hover:text-gray-700 text-center underline underline-offset-4 duration-300">
+        قوانین و مقررات
+        </a>
+    </div>
+      <span id="countdown__auth-form text-sm" class="text-base hidden"></span>
+      <p class="status__auth-form hidden !mb-0 text-sm" data-auth-message="status"></p>
     </div>
     <?php wp_nonce_field('msa_ajax_nonce', 'msa-nonce') ?>
   </form>
 
 </div>
-
 
 <div class="background__auth-form !m-0 fixed inset-0 bg-gray-100 z-[9998]"></div>
 <?php if ($args['view-modal-form']): ?>

@@ -21,11 +21,4 @@ jQuery(document).ready(function ($) {
   //   $("body").removeClass("overflow-hidden");
   // });
 
-  //--------------------------------------------------------Show or Hide mini cart
-
-  $(".mini-cart__backdrop").click(function () {
-    $(".nav-menu__mini-cart").fadeToggle(300);
-    $(".mini-cart__backdrop").fadeToggle(300);
-    $("body").removeClass("overflow-hidden");
-  });
 });

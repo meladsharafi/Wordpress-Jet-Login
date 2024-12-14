@@ -93,7 +93,7 @@ class AuthForm {
 
   isExpireOtp(message) {
     $("#footer__auth-form").prepend(
-      "<a class='block btn-main' href='javascript:window.location.href=window.location.href'>تلاش مجدد</a>"
+      "<a class='block btn-main decoration-none' href='javascript:window.location.href=window.location.href'>تلاش مجدد</a>"
     );
     $("#countdown__auth-form").html(
       "کد تایید منقضی شد، لطفا دوباره امتحان کنید."
