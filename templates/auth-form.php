@@ -66,7 +66,7 @@ if (is_user_logged_in()) {
         قوانین و مقررات
         </a>
     </div>
-      <span id="countdown__auth-form text-sm" class="text-base hidden"></span>
+      <span id="countdown__auth-form" class="hidden text-sm"></span>
       <p class="status__auth-form hidden !mb-0 text-sm" data-auth-message="status"></p>
     </div>
     <?php wp_nonce_field('msa_ajax_nonce', 'msa-nonce') ?>
